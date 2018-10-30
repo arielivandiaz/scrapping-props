@@ -9,7 +9,7 @@ from scrapy.linkextractors import LinkExtractor
 from scrapy.exceptions import CloseSpider
 from scrapy.selector import HtmlXPathSelector
 from mercado.items import *
-import time
+
 
 VERBOSE = 0
 WRITE = 1

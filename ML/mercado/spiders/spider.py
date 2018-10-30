@@ -9,13 +9,12 @@ from scrapy.linkextractors import LinkExtractor
 from scrapy.exceptions import CloseSpider
 from scrapy.selector import HtmlXPathSelector
 from mercado.items import *
-import time 
+import time
 
 VERBOSE = 0
 WRITE = 1
 MAX_FILE = 25000
 CHANGE_URL = 500
-
 
 
 class MercadoSpider(CrawlSpider):
@@ -31,7 +30,7 @@ class MercadoSpider(CrawlSpider):
 	ciudad=""
 	vendedor=""
 	start_from=""
-	archivo=""
+	archivo = ""
 
 
 	url_count = 0
@@ -270,7 +269,7 @@ class MercadoSpider(CrawlSpider):
 
 		
 
-			else: # * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+			elif len(precio) >2 : # * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
 				xpaths = MercadoXpaths()
 
 
@@ -353,6 +352,10 @@ class MercadoSpider(CrawlSpider):
 							print keyword,'\t',data[key]
 					
 
+		
+			else:
+				time.sleep(5)
+
 			data['url'] = str(response.request.url)
 
 			if VERBOSE: print '*'*50
@@ -374,7 +377,6 @@ class MercadoSpider(CrawlSpider):
 			if self.item_count > CHANGE_URL:
 				self.item_count == 0
 				self.url_count +=1
-				time.sleep(60)
 				if self.url_count == self.urls_max:
 					self.url_count = 0
 	
@@ -383,6 +385,8 @@ class MercadoSpider(CrawlSpider):
 			print "===>> Cantidad de elementos: " ,self.item_count_main, "*"		
 			print "===>> Last URL : ",  str(response.request.url)
 			print '*'*50
+
+
 		else:
 			print '*'*50
 			print "===>> Cantidad de elementos: " ,self.item_count_main, "*"		
