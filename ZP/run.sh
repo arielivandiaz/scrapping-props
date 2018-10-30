@@ -1,0 +1,1 @@
+sudo scrapy crawl mercado 
