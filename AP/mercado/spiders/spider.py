@@ -44,6 +44,18 @@ class MercadoSpider(CrawlSpider):
 						   callback = 'parse_item')
 			
 	}
+	def __init__(self, *a, **kw):   
+
+		super(MercadoSpider, self).__init__(*a, **kw)
+		
+
+		print kw
+		for key in kw:
+
+			if key=='archivo':			
+				self.filename=kw[key]
+
+	
 	
 	
 	def parse_item(self, response):
